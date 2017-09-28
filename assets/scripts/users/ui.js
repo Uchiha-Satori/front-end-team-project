@@ -6,6 +6,7 @@ const ux = require('./ux.js')
 const onCreateSuccess = function () {
   $('.user-messages').children().hide()
   $('#create-account-success').show()
+  $('#create-account')[0].reset()
 }
 
 const onError = function (response) {
@@ -17,6 +18,7 @@ const onSignInSuccess = function (data) {
   ux.signIn()
   console.log('You successfully pooped')
   app.user = data.user
+  $('#signin-account')[0].reset()
 }
 
 const onSignInError = function (response) {
@@ -27,6 +29,7 @@ const onSignInError = function (response) {
 const onChangePasswordSuccess = function () {
   console.log('You succesfully change your password')
   ux.changePasswordSuccess()
+  $('#change-password')[0].reset()
 }
 
 const onChangePasswordError = function (response) {
