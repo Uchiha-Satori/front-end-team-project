@@ -10,7 +10,8 @@ const onCreateAccount = function (event) {
   console.log('passing through event js')
   console.log(data)
   if (data.credentials.password !== data.credentials.password_confirmation) {
-    $(() => $('#password-match-error').show())
+    $('.user-messages').children().hide()
+    $('#password-match-error').show()
   } else {
     userApi.create(data)
       .then(userUi.onCreateSuccess)
