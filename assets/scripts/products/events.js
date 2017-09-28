@@ -33,10 +33,17 @@ const onGetProduct = function (event) {
     .catch(productUi.onGetProductError)
 }
 
-let id = ''
-
-const onClickUpdate = function (event) {
-  id = $(this).data('id')
+// This is a separate object that holds the variable for the
+// update row's id and the update function which is passed from the
+// click handler in index.js when a user clicks the update button.
+// The updateProduct function's event data comes from a submitted form
+// but does not contain a product id. We have to also target the click of
+// the update button in order to get the row's id.
+const clickId = {
+  id: '',
+  update: (event) => {
+    clickId.id = $(event.target).data('id')
+  }
 }
 
 const onUpdateProduct = function (event) {
@@ -44,8 +51,8 @@ const onUpdateProduct = function (event) {
   const data = getFormFields(event.target)
   console.log('passing through events.js')
   console.log(data)
-  console.log(id)
-  productApi.updateProduct(data, id)
+  console.log(clickId.id)
+  productApi.updateProduct(data, clickId.id)
     .then(productUi.onUpdateProductSuccess)
     .catch(productUi.onUpdateProductError)
 }
@@ -62,7 +69,7 @@ module.exports = {
   onCreateProduct,
   onGetAllProducts,
   onGetProduct,
-  onClickUpdate,
+  clickId,
   onUpdateProduct,
   onDeleteProduct
 }
