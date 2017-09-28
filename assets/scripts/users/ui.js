@@ -20,6 +20,7 @@ const onSignInSuccess = function (data) {
 }
 
 const onSignInError = function (response) {
+  $('.user-messages').children().hide()
   $('#sign-in-error').show()
 }
 
