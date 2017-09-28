@@ -4,17 +4,13 @@ const app = require('../store.js')
 const ux = require('./ux.js')
 
 const onCreateSuccess = function () {
-  $(() => {
-    $('.user-messages').children().hide()
-    $('#create-account-success').show()
-  })
+  $('.user-messages').children().hide()
+  $('#create-account-success').show()
 }
 
 const onError = function (response) {
-  $(() => {
-    $('#create-account-error').show()
-    $('#password-match-error').hide()
-  })
+  $('.user-messages').children().hide()
+  $('#create-account-error').show()
 }
 
 const onSignInSuccess = function (data) {
@@ -24,7 +20,7 @@ const onSignInSuccess = function (data) {
 }
 
 const onSignInError = function (response) {
-  $(() => $('#sign-in-error').show())
+  $('#sign-in-error').show()
 }
 
 const onChangePasswordSuccess = function () {
