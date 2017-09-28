@@ -16,7 +16,6 @@ const onUpdateProductSuccess = function () {
 
 const onUpdateProductError = function () {
   console.log('Your update fails')
-  $('#myModal').modal('show')
 }
 
 const onGetAllProductsSuccess = function (data) {
@@ -49,6 +48,7 @@ const onDeleteProductSuccess = function (data) {
 
 const onDeleteProductError = function (error) {
   console.error(error)
+  $('#myModal').modal('show')
 }
 
 const onGetProductSuccess = function (data) {
