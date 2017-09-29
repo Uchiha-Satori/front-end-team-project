@@ -100,7 +100,6 @@
         <script id="product-inventory-template" type="text/x-handlebars-template">
             <h1>Product Inventory</h1>
             <br>
-              <form class='update-product-form'>
               <table class='table'>
                 <thead>
                   <tr>
@@ -119,12 +118,11 @@
                     <td>{{product_name}}</td>
                     <td>{{sku_number}}</td>
                     <td>{{department}}</td>
-                    <td><input type='number' name='quantity_number' value={{quantity_number}}></td>
+                    <td>{{quantity_number}}</td>
                     <td>{{quantity_unit}}</td>
-                    <td><button type='submit' class="button update-product-button" data-id={{_id}}>Update</button></td>
+                    <td><button type='submit' class="button get-product-button" data-id={{_id}}>Update</button></td>
                     <td><button class="button delete-product-button" data-id={{_id}}>Delete</button></td>
                   </tr>
-                </form>
                 {{/each}}
                 </tbody>
               </table>
