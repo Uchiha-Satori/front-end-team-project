@@ -128,6 +128,36 @@
               </table>
           </script>
 
+          <script id="product-show-template" type="text/x-handlebars-template">
+              <h1>Product Inventory</h1>
+              <br>
+                <table class='table'>
+                  <thead>
+                    <tr>
+                      <th>ID</th>
+                      <th>Product Name</th>
+                      <th>SKU Number</th>
+                      <th>Department</th>
+                      <th>Quantity</th>
+                      <th>Unit</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                  {{#each fields}}
+                    <tr class={{_id}}>
+                      <td>{{_id}}</td>
+                      <td>{{product_name}}</td>
+                      <td>{{sku_number}}</td>
+                      <td>{{department}}</td>
+                      <td><input type='number' value={{quantity_number}} /></td>
+                      <td>{{quantity_unit}}</td>
+                      <td><button type='submit' class="button update-product-button" data-id={{_id}}>Update</button></td>
+                    </tr>
+                  {{/each}}
+                  </tbody>
+                </table>
+            </script>
+
           <!-- Code heavily references a jsfiddle example at: http://jsfiddle.net/tvshajeer/hLxauuaz/  -->
           <!-- Modal -->
           <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
