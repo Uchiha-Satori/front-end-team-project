@@ -57,13 +57,11 @@ const onGetProductSuccess = function (data) {
   console.log('on get product success!')
   console.log(data.product)
   $(() => {
-    const theTemplateScript = $('#product-inventory-template').html()
+    const theTemplateScript = $('#product-show-template').html()
     // Compile the template
     const theTemplate = Handlebars.compile(theTemplateScript)
     // Define our data object
-    const context = {
-      fields: data.product[0]
-    }
+    const context = data.product
     // Pass our data to the template
     const theCompiledHtml = theTemplate(context)
     // Add the compiled html to the page
