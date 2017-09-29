@@ -12,6 +12,7 @@ const onCreateproductError = function (response) {
 
 const onUpdateProductSuccess = function () {
   console.log('You update it good!!!')
+  $('.update-product-form')[0].reset()
 }
 
 const onUpdateProductError = function () {
@@ -52,7 +53,23 @@ const onDeleteProductError = function (error) {
 }
 
 const onGetProductSuccess = function (data) {
-  console.log(data)
+  $('#table-holder').empty()
+  console.log('on get product success!')
+  console.log(data.product)
+  $(() => {
+    const theTemplateScript = $('#product-inventory-template').html()
+    // Compile the template
+    const theTemplate = Handlebars.compile(theTemplateScript)
+    // Define our data object
+    const context = {
+      fields: data.product[0]
+    }
+    // Pass our data to the template
+    const theCompiledHtml = theTemplate(context)
+    // Add the compiled html to the page
+    $('#table-holder').prepend(theCompiledHtml)
+    console.log('last line within function')
+  })
 }
 
 const onGetProductError = function (error) {

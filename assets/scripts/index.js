@@ -25,8 +25,8 @@ $(() => {
   $('#get-table').on('click', productEvents.onGetAllProducts)
   $('#create-product').on('submit', productEvents.onCreateProduct)
   $(document).on('click', '.delete-product-button', productEvents.onDeleteProduct)
-  $(document).on('submit', '.update-product-form', productEvents.onUpdateProduct)
-  $(document).on('click', '.update-product-button', productEvents.clickId.update)
+  // $(document).on('submit', '.update-product-form', productEvents.onUpdateProduct)
+  $(document).on('click', '.get-product-button', productEvents.onGetProduct)
 
   $('.table-page').children().hide()
   $('.user-messages').children().hide()

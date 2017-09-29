@@ -27,8 +27,9 @@ const onGetAllProducts = function (event) {
 
 const onGetProduct = function (event) {
   event.preventDefault()
-  const data = getFormFields(event.target)
-  productApi.getProduct(data)
+  const id = $(this).data('id')
+  console.log(id)
+  productApi.getProduct(id)
     .then(productUi.onGetProductSuccess)
     .catch(productUi.onGetProductError)
 }
@@ -42,16 +43,18 @@ const onGetProduct = function (event) {
 const clickId = {
   id: '',
   update: (event) => {
+    console.log('clickId event.target:')
+    console.log(event.target)
     clickId.id = $(event.target).data('id')
   }
 }
 
 const onUpdateProduct = function (event) {
   event.preventDefault()
+  console.log(event.target)
   const data = getFormFields(event.target)
   console.log('passing through events.js')
   console.log(data)
-  console.log(clickId.id)
   productApi.updateProduct(data, clickId.id)
     .then(productUi.onUpdateProductSuccess)
     .catch(productUi.onUpdateProductError)
