@@ -3,8 +3,6 @@
 const app = require('../store.js')
 
 const create = function (data) {
-  console.log('passing thought api js')
-  console.log(app.host)
   return $.ajax({
     url: app.host + '/sign-up',
     method: 'POST',
@@ -21,7 +19,6 @@ const signIn = function (data) {
 }
 
 const changePassword = function (data) {
-  console.log('passing through the api.js')
   return $.ajax({
     url: app.host + '/change-password/' + app.user.id,
     method: 'PATCH',
@@ -33,7 +30,6 @@ const changePassword = function (data) {
 }
 
 const signOut = function () {
-  console.log('passing through the api.js')
   return $.ajax({
     url: app.host + '/sign-out/' + app.user.id,
     method: 'DELETE',
