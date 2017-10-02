@@ -7,8 +7,6 @@ const getFormFields = require('../../../lib/get-form-fields')
 const onCreateAccount = function (event) {
   event.preventDefault()
   const data = getFormFields(event.target)
-  console.log('passing through event js')
-  console.log(data)
   if (data.credentials.password !== data.credentials.password_confirmation) {
     $('.user-messages').children().hide()
     $('#password-match-error').show()

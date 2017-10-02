@@ -3,7 +3,6 @@
 const app = require('../store.js')
 
 const createProduct = function (data) {
-  console.log('passing through products api js')
   return $.ajax({
     url: app.host + '/products',
     method: 'POST',
@@ -15,7 +14,6 @@ const createProduct = function (data) {
 }
 
 const getAllProducts = function () {
-  console.log('passing through getall api.js')
   return $.ajax({
     url: app.host + '/products',
     method: 'GET',
@@ -36,8 +34,6 @@ const getProduct = function (id) {
 }
 
 const updateProduct = function (data, id) {
-  console.log('passing through api.js!')
-  console.log(data)
   return $.ajax({
     url: app.host + '/products/' + id,
     method: 'PATCH',

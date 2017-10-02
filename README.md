@@ -1,16 +1,18 @@
-## Go Team Pug Front End!
+# Funventory
 
-# Git Hub Procedure
+## User Stories
+1. As a new employee, I should be able to sign up for an account so I can perform limited actions (search/update) on the inventory.
+2. As a non-admin employee and manager, I should be able to search for an item based on SKU number, product name, or department.
+3. As both a non-admin employee and manager, I should be able to update quantity.
+4. As a manager, I want to view inventory levels to inform my business practices.
+5. As a manager, I want to be able to delete a product in the case that we no longer stock that product.
+6. As a manager, I want to be able to create a new product.
+7. REACH: As a manager, I want to be alerted when an item gets to a certain quantity level so I can order more/less when needed.
 
-When you are starting work on a new feature:
-
-1. Open your terminal and check into the directory under the ```development``` branch.
-2. Run ```git pull --rebase origin development```
-3. a. If you are creating a feature branch, run ```git checkout -b <[your-initials]-[feature-name]>```
-   b. If you are returning to an old branch that you have already pushed to origin, run ```git checkout <branch-name>``` then run ```git rebase development```
-
-When you are ready to push your feature:
-
-1. Commit all changes.
-2. Run ```git push origin <branch-name>```
-3. Submit a pull request to the Team Pug Git Hub ```development``` branch
+## Wireframes and ERD
+<!-- html images
+<img src="url" alt="some_text" style="width:width;height:height;"> -->
+<img src="https://i.imgur.com/h2Qhfe0.png" alt="Login_1user" style="width:50%;height:50%;">
+<img src="https://i.imgur.com/3nCiI7B.png" alt="Login_2users" style="width:50%;height:50%;">
+<img src="https://i.imgur.com/ZxSooEh.png" alt="wireframe" style="width:50%;height:50%;">
+<img src="https://imgur.com/D3o4lE6.png" alt="ERD" style="width:50%;height:50%;">

@@ -16,7 +16,6 @@ const onError = function (response) {
 
 const onSignInSuccess = function (data) {
   ux.signIn()
-  console.log('You successfully pooped')
   app.user = data.user
   $('#signin-account')[0].reset()
 }
@@ -27,24 +26,20 @@ const onSignInError = function (response) {
 }
 
 const onChangePasswordSuccess = function () {
-  console.log('You succesfully change your password')
   ux.changePasswordSuccess()
   $('#change-password')[0].reset()
 }
 
 const onChangePasswordError = function (response) {
-  console.log('I am in ui.js')
   $('#password-change-error').show()
 }
 
 const onSignOutSuccess = function () {
-  console.log('You successfully sign out')
   app.user = null
   ux.signOut()
 }
 
-const onSignOutError = function (response) {
-  console.log(response)
+const onSignOutError = function () {
 }
 
 module.exports = {

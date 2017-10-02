@@ -5,8 +5,6 @@ const productUi = require('./ui.js')
 const getFormFields = require('../../../lib/get-form-fields')
 
 const onCreateProduct = function (event) {
-  console.log('passing through products event js')
-  console.log(data)
   event.preventDefault()
   const data = getFormFields(event.target)
   // may need to update name of create after html is created
@@ -18,7 +16,6 @@ const onCreateProduct = function (event) {
 
 // is 'const data' necessary for functionality?
 const onGetAllProducts = function (event) {
-  console.log('passing through get all events.js')
   event.preventDefault()
   productApi.getAllProducts()
     .then(productUi.onGetAllProductsSuccess)
@@ -28,7 +25,6 @@ const onGetAllProducts = function (event) {
 const onGetProduct = function (event) {
   event.preventDefault()
   const id = $(this).data('id')
-  console.log(id)
   productApi.getProduct(id)
     .then(productUi.onGetProductSuccess)
     .catch(productUi.onGetProductError)
@@ -36,13 +32,9 @@ const onGetProduct = function (event) {
 
 // TODO: WHAT WHAT WHAT IS HAPPENING HERE
 const onUpdateProduct = function (event) {
-  console.log('passing through events.js')
   event.preventDefault()
   const id = $(this).data('id')
   const data = getFormFields(event.target)
-
-  console.log(data)
-  console.log(id)
   productApi.updateProduct(data, id)
     .then(productUi.onUpdateProductSuccess)
     .then(onGetAllProducts(event))
