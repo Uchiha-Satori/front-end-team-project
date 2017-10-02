@@ -1,28 +1,21 @@
 'use strict'
 
-const app = require('../store.js')
-
 const onCreateProductSuccess = function () {
-  console.log('You successfully created a product')
+  $('#create-product')[0].reset()
 }
 
 const onCreateproductError = function (response) {
-  console.error(response)
 }
 
 const onUpdateProductSuccess = function () {
-  console.log('You update it good!!!')
   $('.update-product-form')[0].reset()
 }
 
 const onUpdateProductError = function () {
-  console.log('Your update fails')
 }
 
 const onGetAllProductsSuccess = function (data) {
   $('#table-holder').empty()
-  console.log('first line inside function')
-  console.log(data.products)
   $(() => {
     const theTemplateScript = $('#product-inventory-template').html()
     // Compile the template
@@ -35,27 +28,22 @@ const onGetAllProductsSuccess = function (data) {
     const theCompiledHtml = theTemplate(context)
     // Add the compiled html to the page
     $('#table-holder').prepend(theCompiledHtml)
-    console.log('last line within function')
   })
 }
 
 const onGetAllProductsError = function (response) {
-  console.error(response)
 }
 
 const onDeleteProductSuccess = function (data) {
   $('.' + data.product.id).remove()
 }
 
-const onDeleteProductError = function (error) {
-  console.error(error)
+const onDeleteProductError = function () {
   $('#myModal').modal('show')
 }
 
 const onGetProductSuccess = function (data) {
   $('#table-holder').empty()
-  console.log('on get product success!')
-  console.log(data.product)
   $(() => {
     const theTemplateScript = $('#product-show-template').html()
     // Compile the template
@@ -66,12 +54,10 @@ const onGetProductSuccess = function (data) {
     const theCompiledHtml = theTemplate(context)
     // Add the compiled html to the page
     $('#table-holder').prepend(theCompiledHtml)
-    console.log('last line within function')
   })
 }
 
-const onGetProductError = function (error) {
-  console.error(error)
+const onGetProductError = function () {
 }
 
 module.exports = {
