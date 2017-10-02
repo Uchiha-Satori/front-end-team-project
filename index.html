@@ -100,7 +100,6 @@
         <script id="product-inventory-template" type="text/x-handlebars-template">
             <h1>Product Inventory</h1>
             <br>
-              <form class='update-product-form'>
               <table class='table'>
                 <thead>
                   <tr>
@@ -119,16 +118,48 @@
                     <td>{{product_name}}</td>
                     <td>{{sku_number}}</td>
                     <td>{{department}}</td>
-                    <td><input type='number' name='quantity_number' value={{quantity_number}}></td>
+                    <td>{{quantity_number}}</td>
                     <td>{{quantity_unit}}</td>
-                    <td><button type='submit' class="button update-product-button" data-id={{_id}}>Update</button></td>
+                    <td><button type='submit' class="button get-product-button" data-id={{_id}}>Update</button></td>
                     <td><button class="button delete-product-button" data-id={{_id}}>Delete</button></td>
                   </tr>
-                </form>
                 {{/each}}
                 </tbody>
               </table>
           </script>
+
+          <script id="product-show-template" type="text/x-handlebars-template">
+              <h1>Product Inventory</h1>
+              <br>
+                <table class='table'>
+                  <thead>
+                    <tr>
+                      <th>ID</th>
+                      <th>Product Name</th>
+                      <th>SKU Number</th>
+                      <th>Department</th>
+                      <th>Quantity</th>
+                      <th>Unit</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                      <tr class={{_id}}>
+                        <td>{{_id}}</td>
+                        <td>{{product_name}}</td>
+                        <td>{{sku_number}}</td>
+                        <td>{{department}}</td>
+                        <td>
+                          <form class="update-product-form" data-id={{_id}} method="patch">
+                            <input name='quantity_number' type='number' value='' />
+                            <button type='submit' class="button update-product-button" data-id={{_id}}>Update</button>
+                          </form>
+                        </td>
+                        <td>{{quantity_unit}}</td>
+                      </tr>
+                  </tbody>
+                </table>
+              </form>
+            </script>
 
           <!-- Code heavily references a jsfiddle example at: http://jsfiddle.net/tvshajeer/hLxauuaz/  -->
           <!-- Modal -->
@@ -139,7 +170,7 @@
                   <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                 </div>
                 <div class="modal-body">
-                  You are not authorized to delete this product.
+                  You are not authorized to delete this product. You can only delete products that you have created.
                 </div>
               </div>
             </div>
