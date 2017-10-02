@@ -7,6 +7,10 @@ body {
   color: white;
 }
 
+h1 {
+  margin-bottom: 30px;
+}
+
 h1,
 h2 {
   font-weight: 300;
@@ -45,4 +49,35 @@ th {
 
 ::-webkit-input-placeholder {
   color: white;
+}
+
+.error {
+  color: red;
+}
+
+.success {
+  color: green;
+}
+
+.user-messages {
+  padding-top: 15px;
+}
+
+.sign-out-div {
+  text-align: right;
+  margin-top: 15px;
+  margin-bottom: 15px;
+}
+
+.sign-out-div form {
+  display: inline;
+  margin-left: 15px;
+}
+
+.start-forms {
+  padding-bottom: 15px;
+}
+
+.modal-body {
+  color: black;
 }

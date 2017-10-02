@@ -12,10 +12,11 @@ const onCreateproductError = function (response) {
 
 const onUpdateProductSuccess = function () {
   console.log('You update it good!!!')
+  $('.update-product-form')[0].reset()
 }
 
-const onUpdateproductError = function () {
-  console.log('Your edit fails')
+const onUpdateProductError = function () {
+  console.log('Your update fails')
 }
 
 const onGetAllProductsSuccess = function (data) {
@@ -42,17 +43,31 @@ const onGetAllProductsError = function (response) {
   console.error(response)
 }
 
-const onDeleteProductSuccess = function (id) {
-  console.log('you deleted a product!')
-  $('.' + id).remove()
+const onDeleteProductSuccess = function (data) {
+  $('.' + data.product.id).remove()
 }
 
 const onDeleteProductError = function (error) {
   console.error(error)
+  $('#myModal').modal('show')
 }
 
 const onGetProductSuccess = function (data) {
-  console.log(data)
+  $('#table-holder').empty()
+  console.log('on get product success!')
+  console.log(data.product)
+  $(() => {
+    const theTemplateScript = $('#product-show-template').html()
+    // Compile the template
+    const theTemplate = Handlebars.compile(theTemplateScript)
+    // Define our data object
+    const context = data.product
+    // Pass our data to the template
+    const theCompiledHtml = theTemplate(context)
+    // Add the compiled html to the page
+    $('#table-holder').prepend(theCompiledHtml)
+    console.log('last line within function')
+  })
 }
 
 const onGetProductError = function (error) {
@@ -63,7 +78,7 @@ module.exports = {
   onCreateProductSuccess,
   onCreateproductError,
   onUpdateProductSuccess,
-  onUpdateproductError,
+  onUpdateProductError,
   onGetAllProductsSuccess,
   onGetAllProductsError,
   onDeleteProductSuccess,

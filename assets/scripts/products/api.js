@@ -25,9 +25,9 @@ const getAllProducts = function () {
   })
 }
 
-const getProduct = function () {
+const getProduct = function (id) {
   return $.ajax({
-    url: app.host + '/products/' + app.products._id,
+    url: app.host + '/products/' + id,
     method: 'GET',
     headers: {
       Authorization: 'Token token=' + app.user.token
@@ -37,18 +37,22 @@ const getProduct = function () {
 
 const updateProduct = function (data, id) {
   console.log('passing through api.js!')
+  console.log(data)
   return $.ajax({
     url: app.host + '/products/' + id,
     method: 'PATCH',
     headers: {
       Authorization: 'Token token=' + app.user.token
     },
-    data
+    data: {
+      'product': {
+        'quantity_number': data.quantity_number
+      }
+    }
   })
 }
 
 const deleteProduct = function (id) {
-  console.log('passing through api.js')
   return $.ajax({
     url: app.host + '/products/' + id,
     method: 'DELETE',

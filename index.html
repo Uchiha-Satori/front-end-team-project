@@ -14,43 +14,58 @@
       <script src=https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.10/handlebars.js></script>
     </head>
     <body class="container-fluid">
-      <h1>Funventory!</h1>
+      <h1 class="welcome">Welcome to Funventory!</h1>
 
-      <div class='account-forms'>
-        <form class="accounts" id="signin-account">
-          <h2> Sign in to your account</h2>
-          <label>Username<input required type="text" name="credentials[email]"></label>
-          <br>
-          <label>Password<input required type="password" name="credentials[password]"></label>
-          <br>
-          <button type="submit" id="signin-button">Sign in</button>
-        </form>
-
-        <form class="accounts" id="create-account">
-          <h2>Create a new account</h2>
-          <label>Username<input required type="text" name="credentials[email]"></label>
-          <br>
-          <label>Password<input required type="password" name="credentials[password]"></label>
-          <br>
-          <label>Confirm Password<input required type="password" name="credentials[password_confirmation]"></label>
-          <br>
-          <button type="submit" id="create-button">Create an Account</button>
-        </form>
-
-        <form class="accounts" id="change-password">
-          <h2> Change password</h2>
-          <label>Old Password<input required type="password" name="passwords[old]"></label>
-          <br>
-          <label>New Password<input required type="password" name="passwords[new]"></label>
-          <br>
-          <button type="submit" id="change-password-button">Change password</button>
-        </form>
-
+      <div class='sign-out-div'>
+        <button id='reveal-change-password'>Change Password</button>
         <form class="accounts" id="signout-account">
-          <h2> Sign out</h2>
           <button type="submit" id="signout-button">Sign out</button>
         </form>
-        <br>
+      </div>
+
+      <div class='account-actions-holder'>
+        <div class='account-forms'>
+          <div class='user-messages'>
+            <p class="error" id="password-change-error">Double check your old password.</p>
+            <p class="success" id="password-change-success">You successfully changed your password!</p>
+            <p class="error" id="create-account-error">Your username may be already taken, try another.</p>
+            <p class="error" id="password-match-error">Your password fields don't match.</p>
+            <p class="success" id="create-account-success">You successfully created an account! Please sign in.</p>
+            <p class="error" id="sign-in-error">Wrong password or email.</p>
+          </div>
+
+          <div class='start-forms'>
+            <form class="accounts" id="signin-account">
+              <h2> Sign in to your account</h2>
+              <label>Username<input required type="text" name="credentials[email]"></label>
+              <br>
+              <label>Password<input required type="password" name="credentials[password]"></label>
+              <br>
+              <button type="submit" id="signin-button">Sign in</button>
+            </form>
+
+            <form class="accounts" id="create-account">
+              <h2>Create a new account</h2>
+              <label>Username<input required type="text" name="credentials[email]"></label>
+              <br>
+              <label>Password<input required type="password" name="credentials[password]"></label>
+              <br>
+              <label>Confirm Password<input required type="password" name="credentials[password_confirmation]"></label>
+              <br>
+              <button type="submit" id="create-button">Create an Account</button>
+            </form>
+          </div>
+
+          <form class="accounts" id="change-password">
+            <h2> Change password</h2>
+            <label>Old Password<input required type="password" name="passwords[old]"></label>
+            <br>
+            <label>New Password<input required type="password" name="passwords[new]"></label>
+            <br>
+            <button type="submit" id="change-password-button">Change password</button>
+          </form>
+          <br>
+        </div>
       </div>
 
       <div class="table-page">
@@ -85,7 +100,6 @@
         <script id="product-inventory-template" type="text/x-handlebars-template">
             <h1>Product Inventory</h1>
             <br>
-              <form class='update-product-form'>
               <table class='table'>
                 <thead>
                   <tr>
@@ -104,15 +118,63 @@
                     <td>{{product_name}}</td>
                     <td>{{sku_number}}</td>
                     <td>{{department}}</td>
-                    <td><input type='number' name='quantity_number' value={{quantity_number}}></td>
+                    <td>{{quantity_number}}</td>
                     <td>{{quantity_unit}}</td>
-                    <td><button type='submit' class="button update-product-button" data-id={{_id}}>Update</button></td>
+                    <td><button type='submit' class="button get-product-button" data-id={{_id}}>Update</button></td>
                     <td><button class="button delete-product-button" data-id={{_id}}>Delete</button></td>
                   </tr>
-                </form>
                 {{/each}}
                 </tbody>
               </table>
           </script>
+
+          <script id="product-show-template" type="text/x-handlebars-template">
+              <h1>Product Inventory</h1>
+              <br>
+                <table class='table'>
+                  <thead>
+                    <tr>
+                      <th>ID</th>
+                      <th>Product Name</th>
+                      <th>SKU Number</th>
+                      <th>Department</th>
+                      <th>Quantity</th>
+                      <th>Unit</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                      <tr class={{_id}}>
+                        <td>{{_id}}</td>
+                        <td>{{product_name}}</td>
+                        <td>{{sku_number}}</td>
+                        <td>{{department}}</td>
+                        <td>
+                          <form class="update-product-form" data-id={{_id}} method="patch">
+                            <input name='quantity_number' type='number' value='' />
+                            <button type='submit' class="button update-product-button" data-id={{_id}}>Update</button>
+                          </form>
+                        </td>
+                        <td>{{quantity_unit}}</td>
+                      </tr>
+                  </tbody>
+                </table>
+              </form>
+            </script>
+
+          <!-- Code heavily references a jsfiddle example at: http://jsfiddle.net/tvshajeer/hLxauuaz/  -->
+          <!-- Modal -->
+          <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                </div>
+                <div class="modal-body">
+                  You are not authorized to delete this product. You can only delete products that you have created.
+                </div>
+              </div>
+            </div>
+          </div>
+
     </body>
 </html>
