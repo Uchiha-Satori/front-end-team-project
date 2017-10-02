@@ -12,6 +12,7 @@ const onCreateProduct = function (event) {
   // may need to update name of create after html is created
   productApi.createProduct(data)
     .then(productUi.onCreateProductSuccess)
+    .then(onGetAllProducts(event))
     .catch(productUi.onCreateProductError)
 }
 
@@ -19,8 +20,7 @@ const onCreateProduct = function (event) {
 const onGetAllProducts = function (event) {
   console.log('passing through get all events.js')
   event.preventDefault()
-  const data = getFormFields(event.target)
-  productApi.getAllProducts(data)
+  productApi.getAllProducts()
     .then(productUi.onGetAllProductsSuccess)
     .catch(productUi.onGetAllProductsError)
 }
@@ -34,29 +34,18 @@ const onGetProduct = function (event) {
     .catch(productUi.onGetProductError)
 }
 
-// This is a separate object that holds the variable for the
-// update row's id and the update function which is passed from the
-// click handler in index.js when a user clicks the update button.
-// The updateProduct function's event data comes from a submitted form
-// but does not contain a product id. We have to also target the click of
-// the update button in order to get the row's id.
-const clickId = {
-  id: '',
-  update: (event) => {
-    console.log('clickId event.target:')
-    console.log(event.target)
-    clickId.id = $(event.target).data('id')
-  }
-}
-
+// TODO: WHAT WHAT WHAT IS HAPPENING HERE
 const onUpdateProduct = function (event) {
-  event.preventDefault()
-  console.log(event.target)
-  const data = getFormFields(event.target)
   console.log('passing through events.js')
+  event.preventDefault()
+  const id = $(this).data('id')
+  const data = getFormFields(event.target)
+
   console.log(data)
-  productApi.updateProduct(data, clickId.id)
+  console.log(id)
+  productApi.updateProduct(data, id)
     .then(productUi.onUpdateProductSuccess)
+    .then(onGetAllProducts(event))
     .catch(productUi.onUpdateProductError)
 }
 
@@ -72,7 +61,6 @@ module.exports = {
   onCreateProduct,
   onGetAllProducts,
   onGetProduct,
-  clickId,
   onUpdateProduct,
   onDeleteProduct
 }
