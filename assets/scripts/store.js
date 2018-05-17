@@ -1,6 +1,5 @@
 'use strict'
 
-const store = {
+module.exports = {
+  host: 'https://funventory.herokuapp.com'
 }
-
-module.exports = store

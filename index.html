@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-      <title>Example</title>
+      <title>Funventory!</title>
       <meta name="viewport" content="width=device-width, initial-scale=1">
 
       <!-- Do not add `link` tags-->
@@ -10,16 +10,171 @@
       <!-- Do not add `script` tags-->
       <script src="public/vendor.js" type="text/javascript" charset="utf-8" defer></script>
       <script src="public/application.js" type="text/javascript" charset="utf-8" defer></script>
+      <!-- Handlebars Script -->
+      <script src=https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.10/handlebars.js></script>
     </head>
     <body class="container-fluid">
-      <h1>Example</h1>
+      <h1 class="welcome">Welcome to Funventory!</h1>
 
-      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
-      eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
-      minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex
-      ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate
-      velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat
-      cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id
-      est laborum.</p>
+      <div class='sign-out-div'>
+        <button id='reveal-change-password'>Change Password</button>
+        <form class="accounts" id="signout-account">
+          <button type="submit" id="signout-button">Sign out</button>
+        </form>
+      </div>
+
+      <div class='account-actions-holder'>
+        <div class='account-forms'>
+          <div class='user-messages'>
+            <p class="error" id="password-change-error">Double check your old password.</p>
+            <p class="success" id="password-change-success">You successfully changed your password!</p>
+            <p class="error" id="create-account-error">Your username may be already taken, try another.</p>
+            <p class="error" id="password-match-error">Your password fields don't match.</p>
+            <p class="success" id="create-account-success">You successfully created an account! Please sign in.</p>
+            <p class="error" id="sign-in-error">Wrong password or email.</p>
+          </div>
+
+          <div class='start-forms'>
+            <form class="accounts" id="signin-account">
+              <h2> Sign in to your account</h2>
+              <label>Username<input required type="text" name="credentials[email]"></label>
+              <br>
+              <label>Password<input required type="password" name="credentials[password]"></label>
+              <br>
+              <button type="submit" id="signin-button">Sign in</button>
+            </form>
+
+            <form class="accounts" id="create-account">
+              <h2>Create a new account</h2>
+              <label>Username<input required type="text" name="credentials[email]"></label>
+              <br>
+              <label>Password<input required type="password" name="credentials[password]"></label>
+              <br>
+              <label>Confirm Password<input required type="password" name="credentials[password_confirmation]"></label>
+              <br>
+              <button type="submit" id="create-button">Create an Account</button>
+            </form>
+          </div>
+
+          <form class="accounts" id="change-password">
+            <h2> Change password</h2>
+            <label>Old Password<input required type="password" name="passwords[old]"></label>
+            <br>
+            <label>New Password<input required type="password" name="passwords[new]"></label>
+            <br>
+            <button type="submit" id="change-password-button">Change password</button>
+          </form>
+          <br>
+        </div>
+      </div>
+
+      <div class="table-page">
+      <!-- Create product entry -->
+        <form class="products" id="create-product">
+          <h1>Add Product</h1>
+          <input required type='text' name='product[product_name]' placeholder='Product Name'>
+          <input required type='number' name='product[sku_number]' placeholder='SKU Number'>
+          <select name='product[department]'>
+            <option value='Produce'>Produce</option>
+            <option value='Meat'>Meat</option>
+            <option value='Dairy'>Dairy</option>
+            <option value='Grocery'>Grocery</option>
+            <option value='Health and Wellness'>Health and Wellness</option>
+            <option value='Bakery'>Bakery</option>
+            <option value='Deli'>Deli</option>
+          </select>
+          <input required type='number' name='product[quantity_number]' placeholder='Quantity'>
+          <input required type='text' name='product[quantity_unit]' placeholder='Unit Type (e.g. bushels)'>
+          <button type='submit' id='create-product-button'>Add Product</button>
+        </form>
+        <br>
+
+        <!-- Get All Products -->
+        <button id='get-table' class='button' type='submit'>Get Inventory Table</button>
+
+        <div id='table-holder'>
+        </div>
+
+      </div>
+
+        <script id="product-inventory-template" type="text/x-handlebars-template">
+            <h1>Product Inventory</h1>
+            <br>
+              <table class='table'>
+                <thead>
+                  <tr>
+                    <th>ID</th>
+                    <th>Product Name</th>
+                    <th>SKU Number</th>
+                    <th>Department</th>
+                    <th>Quantity</th>
+                    <th>Unit</th>
+                  </tr>
+                </thead>
+                <tbody id='append-products-here'>
+                {{#each fields}}
+                  <tr class={{_id}}>
+                    <td>{{_id}}</td>
+                    <td>{{product_name}}</td>
+                    <td>{{sku_number}}</td>
+                    <td>{{department}}</td>
+                    <td>{{quantity_number}}</td>
+                    <td>{{quantity_unit}}</td>
+                    <td><button type='submit' class="button get-product-button" data-id={{_id}}>Update</button></td>
+                    <td><button class="button delete-product-button" data-id={{_id}}>Delete</button></td>
+                  </tr>
+                {{/each}}
+                </tbody>
+              </table>
+          </script>
+
+          <script id="product-show-template" type="text/x-handlebars-template">
+              <h1>Product Inventory</h1>
+              <br>
+                <table class='table'>
+                  <thead>
+                    <tr>
+                      <th>ID</th>
+                      <th>Product Name</th>
+                      <th>SKU Number</th>
+                      <th>Department</th>
+                      <th>Quantity</th>
+                      <th>Unit</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                      <tr class={{_id}}>
+                        <td>{{_id}}</td>
+                        <td>{{product_name}}</td>
+                        <td>{{sku_number}}</td>
+                        <td>{{department}}</td>
+                        <td>
+                          <form class="update-product-form" data-id={{_id}} method="patch">
+                            <input name='quantity_number' type='number' value='' />
+                            <button type='submit' class="button update-product-button" data-id={{_id}}>Update</button>
+                          </form>
+                        </td>
+                        <td>{{quantity_unit}}</td>
+                      </tr>
+                  </tbody>
+                </table>
+              </form>
+            </script>
+
+          <!-- Code heavily references a jsfiddle example at: http://jsfiddle.net/tvshajeer/hLxauuaz/  -->
+          <!-- Modal -->
+          <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                </div>
+                <div class="modal-body">
+                  You are not authorized to delete this product. You can only delete products that you have created.
+                </div>
+              </div>
+            </div>
+          </div>
+
     </body>
 </html>

@@ -1,2 +1,83 @@
 $icon-font-path: '~bootstrap-sass/assets/fonts/bootstrap/';
 @import '~bootstrap-sass/assets/stylesheets/bootstrap';
+
+body {
+  text-align: center;
+  background-color: #8C97A2;
+  color: white;
+}
+
+h1 {
+  margin-bottom: 30px;
+}
+
+h1,
+h2 {
+  font-weight: 300;
+}
+
+button {
+  color: white;
+  background-color: #8C97A2;
+  border: 2px solid #B6E2AD;
+}
+
+label {
+  font-weight: 300;
+}
+
+input {
+  background-color: #8C97A2;
+  border: 1px solid white;
+  margin-left: 15px;
+}
+
+select {
+  color: #8C97A2;
+}
+
+th {
+  text-align: center;
+}
+
+.account-forms {
+  border: 5px solid #059005;
+  max-width: 700px;
+  margin: auto;
+  border-radius: 5px;
+}
+
+::-webkit-input-placeholder {
+  color: white;
+}
+
+.error {
+  color: red;
+}
+
+.success {
+  color: green;
+}
+
+.user-messages {
+  padding-top: 15px;
+}
+
+.sign-out-div {
+  text-align: right;
+  margin-top: 15px;
+  margin-bottom: 15px;
+}
+
+.sign-out-div form {
+  display: inline;
+  margin-left: 15px;
+}
+
+.start-forms {
+  padding-bottom: 15px;
+}
+
+.modal-body {
+  color: black;
+}
